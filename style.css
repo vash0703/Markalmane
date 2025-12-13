@@ -53,6 +53,9 @@ h3 {
 .thumb-row img:nth-child(2) {
   transform: rotate(3deg) translateY(6px);
 }
+.thumb-row img:nth-child(3) {
+  transform: rotate(-1deg) translateY(3px);
+}
 
 /* ---------------------------
    Links (Growers Café etc.)
@@ -150,6 +153,13 @@ h3 {
 
 .experience-card a:hover {
   text-decoration: underline;
+}
+.experience-card.full-width {
+  grid-column: 1 / -1;
+}
+.experience-card img {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 .experience-card.full-width {
   grid-column: 1 / -1;
