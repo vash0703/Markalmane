@@ -10,138 +10,87 @@ body {
   line-height: 1.6;
 }
 
-h3 {
-  margin: 10px 0 6px;
-  font-size: 1.05rem;
-}
-
 /* ---------------------------
-   Experience cards
+   Experience grid
 ----------------------------*/
-.experience-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 14px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  margin-bottom: 16px;
-}
-
-/* ---------------------------
-   Tiny thumbnails (ALL images)
-----------------------------*/
-.experience-card.with-thumbnails {
-  position: relative;
-}
-
-.thumb-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.thumb-row img {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  filter: saturate(0.95) contrast(1.05);
-  transform: rotate(-2deg);
-}
-
-/* casual placement for second image */
-.thumb-row img:nth-child(2) {
-  transform: rotate(3deg) translateY(6px);
-}
-.thumb-row img:nth-child(3) {
-  transform: rotate(-1deg) translateY(3px);
-}
-
-/* ---------------------------
-   Links (Growers Café etc.)
-----------------------------*/
-.experience-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  font-size: 0.9rem;
-  color: #3b6b4f;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.experience-link:hover {
-  text-decoration: underline;
-}
-
-.map-icon {
-  font-size: 1rem;
-}
-
-/* ---------------------------
-   Mobile spacing tweaks
-----------------------------*/
-@media (max-width: 600px) {
-  .experience-card {
-    padding: 12px;
-  }
-
-  .thumb-row img {
-    width: 56px;
-    height: 56px;
-  }
-}
-/* ---------- Experience Cards Uniform Styling ---------- */
-
 .experience-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
 }
 
+/* ---------------------------
+   Experience cards
+----------------------------*/
 .experience-card {
-  background: #f1f3ed;
+  background: #eef4ee;               /* light green */
   border-radius: 18px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  font-family: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
 }
 
-/* Image container */
-.experience-card .thumb-row {
+/* Hover lift */
+.experience-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Full-width card (wildlife rule) */
+.experience-card.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ---------------------------
+   Titles & text
+----------------------------*/
+.experience-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+  color: #1f3a2a; /* deep green */
+}
+
+.experience-card p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #3f5a47; /* softer green */
+  margin: 0;
+}
+
+/* ---------------------------
+   Thumbnail images
+----------------------------*/
+.thumb-row {
   display: flex;
   gap: 8px;
 }
 
-/* Small square images */
 .experience-card img {
   width: 64px;
   height: 64px;
   object-fit: cover;
   border-radius: 10px;
   flex-shrink: 0;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  filter: saturate(1.05);
 }
 
-/* Card titles */
-.experience-card h3 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin: 4px 0 0;
-  color: #1f2f22;
+/* casual natural placement */
+.thumb-row img:nth-child(2) {
+  transform: translateY(4px) rotate(2deg);
 }
 
-/* Card text */
-.experience-card p {
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: #5f6f63;
-  margin: 0;
+.thumb-row img:nth-child(3) {
+  transform: translateY(2px) rotate(-2deg);
 }
 
-/* Links inside cards */
+/* ---------------------------
+   Links (Growers Café)
+----------------------------*/
 .experience-card a {
   font-size: 0.9rem;
   color: #2f6f4f;
@@ -149,18 +98,23 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font-weight: 500;
 }
 
 .experience-card a:hover {
   text-decoration: underline;
 }
-.experience-card.full-width {
-  grid-column: 1 / -1;
-}
-.experience-card img {
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-}
-.experience-card.full-width {
-  grid-column: 1 / -1;
+
+/* ---------------------------
+   Mobile tweaks
+----------------------------*/
+@media (max-width: 600px) {
+  .experience-card {
+    padding: 16px;
+  }
+
+  .experience-card img {
+    width: 56px;
+    height: 56px;
+  }
 }
