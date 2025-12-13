@@ -118,3 +118,20 @@ body {
     height: 56px;
   }
 }
+/* ---------------------------------
+   Final experience card styling
+   (override all previous rules)
+---------------------------------- */
+
+.experience-card {
+  background: #eef4ee;           /* light Malnad green */
+  color: #1f3a2e;                /* deep forest green text */
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 26px rgba(31, 58, 46, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.experience-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(31, 58, 46, 0.18);
+}
