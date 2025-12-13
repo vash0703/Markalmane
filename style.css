@@ -151,3 +151,6 @@ h3 {
 .experience-card a:hover {
   text-decoration: underline;
 }
+.experience-card.full-width {
+  grid-column: 1 / -1;
+}
