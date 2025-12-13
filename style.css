@@ -135,3 +135,6 @@ body {
   transform: translateY(-4px);
   box-shadow: 0 14px 34px rgba(31, 58, 46, 0.18);
 }
+.wide-card {
+  margin-top: 20px; /* space above the wide card */
+}
