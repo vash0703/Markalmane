@@ -1235,27 +1235,33 @@ Friends and family pricing works a little differently here — sometimes paid in
   <span class="lightbox-close">&times;</span>
   <img class="lightbox-img" src="" alt="">
 </div>
-  <script>
-    // Mobile nav toggle
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    /* --------------------
+       Mobile Nav (safe)
+    -------------------- */
     const navToggle = document.getElementById("navToggle");
     const navMenu = document.getElementById("navMenu");
 
-    navToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
-    });
-
-    // Close mobile menu on link click
-    navMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("open");
+    if (navToggle && navMenu) {
+      navToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("open");
       });
-    });
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      navMenu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("open");
+        });
+      });
+    }
+
+    /* --------------------
+       Smooth Scroll
+    -------------------- */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener("click", function (e) {
-        const targetId = this.getAttribute("href").slice(1);
-        const target = document.getElementById(targetId);
+        const target = document.getElementById(this.getAttribute("href").slice(1));
         if (!target) return;
         e.preventDefault();
         window.scrollTo({
@@ -1265,75 +1271,47 @@ Friends and family pricing works a little differently here — sometimes paid in
       });
     });
 
-    // Footer year
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-	  <script>
-  // Mobile nav toggle
-  const navToggle = document.getElementById("navToggle");
-  const navMenu = document.getElementById("navMenu");
+    /* --------------------
+       Footer year
+    -------------------- */
+    const year = document.getElementById("year");
+    if (year) year.textContent = new Date().getFullYear();
 
-  navToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("open");
-  });
+    /* ==========================
+       ✅ GALLERY LIGHTBOX (FIXED)
+       ========================== */
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.querySelector(".lightbox-img");
+    const closeBtn = document.querySelector(".lightbox-close");
 
-  navMenu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("open");
-    });
-  });
+    if (!lightbox || !lightboxImg || !closeBtn) return;
 
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const targetId = this.getAttribute("href").slice(1);
-      const target = document.getElementById(targetId);
-      if (!target) return;
-      e.preventDefault();
-      window.scrollTo({
-        top: target.offsetTop - 70,
-        behavior: "smooth",
+    document.querySelectorAll(".gallery-item").forEach(item => {
+      item.addEventListener("click", () => {
+        const bg = item.style.backgroundImage;
+        if (!bg) return; // skip placeholders
+
+        const imgUrl = bg.slice(5, -2);
+        lightboxImg.src = imgUrl;
+        lightbox.style.display = "flex";
+        document.body.style.overflow = "hidden";
       });
     });
-  });
 
-  // Footer year
-  document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-  /* ==========================
-     Gallery Lightbox (WORKING)
-     ========================== */
-
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.querySelector(".lightbox-img");
-  const closeBtn = document.querySelector(".lightbox-close");
-
-  document.querySelectorAll(".gallery-item").forEach(item => {
-    item.addEventListener("click", () => {
-      const bg = item.style.backgroundImage;
-      if (!bg) return; // skip placeholders
-
-      const imgUrl = bg.slice(5, -2);
-      lightboxImg.src = imgUrl;
-      lightbox.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    });
-  });
-
-  closeBtn.addEventListener("click", () => {
-    lightbox.style.display = "none";
-    document.body.style.overflow = "";
-  });
-
-  lightbox.addEventListener("click", e => {
-    if (e.target === lightbox) {
+    closeBtn.addEventListener("click", () => {
       lightbox.style.display = "none";
       document.body.style.overflow = "";
-    }
+    });
+
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) {
+        lightbox.style.display = "none";
+        document.body.style.overflow = "";
+      }
+    });
+
   });
 </script>
 
-  </script>
 </body>
 </html>
