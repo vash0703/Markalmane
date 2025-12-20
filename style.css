@@ -183,27 +183,7 @@ body {
   color: #fff;
   cursor: pointer;
 }
-// Gallery lightbox
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.querySelector(".lightbox-img");
+.gallery-item {
+  cursor: zoom-in;
+}
 
-document.querySelectorAll(".gallery-item").forEach(item => {
-  item.addEventListener("click", () => {
-    const bg = item.style.backgroundImage;
-    if (!bg) return;
-
-    const imgUrl = bg.slice(5, -2);
-    lightboxImg.src = imgUrl;
-    lightbox.style.display = "flex";
-  });
-});
-
-document.querySelector(".lightbox-close").addEventListener("click", () => {
-  lightbox.style.display = "none";
-});
-
-lightbox.addEventListener("click", e => {
-  if (e.target === lightbox) {
-    lightbox.style.display = "none";
-  }
-});
