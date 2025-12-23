@@ -233,8 +233,6 @@
     }
 
     .hero-meta {
-	<span class="badge">📶 Wi-Fi available · UPS backup</span>
-
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
@@ -760,6 +758,7 @@
           <span class="badge">🌾 Malnad village farmhouse</span>
           <span>📍 Malasavara village</span>
           <span>🐾 Pets welcome</span>
+		  <span class="badge">📶 Wi-Fi available · UPS backup</span>
         </div>
 
         <div class="hero-actions">
@@ -1375,6 +1374,31 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowRight") showImage(currentIndex + 1);
   if (e.key === "Escape") closeLightbox();
 });
+
+/* ==========================
+   📱 MOBILE SWIPE SUPPORT
+========================== */
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+lightbox.addEventListener("touchstart", e => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+lightbox.addEventListener("touchend", e => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  const swipeDistance = touchEndX - touchStartX;
+  if (Math.abs(swipeDistance) < 50) return;
+
+  swipeDistance < 0
+    ? showImage(currentIndex + 1)
+    : showImage(currentIndex - 1);
+}
 
 
   });
