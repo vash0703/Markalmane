@@ -233,6 +233,8 @@
     }
 
     .hero-meta {
+	<span class="badge">📶 Wi-Fi available · UPS backup</span>
+
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
@@ -815,6 +817,12 @@
           We have 3 simple, comfortable rooms in the old farmhouse. Expect
           basic comforts, village style — not luxury resort vibes.
         </p>
+		<p style="font-size:0.9rem; color:var(--muted); margin-top:1rem;">
+  <strong>Connectivity & power:</strong>
+  Mobile network can be unreliable in this part of Malnad.
+  Wi-Fi is available at the house, and essential areas are supported by UPS during short power cuts.
+</p>
+
       </div>
 
       <div class="cards-grid">
@@ -1254,11 +1262,13 @@ Friends and family pricing works a little differently here — sometimes paid in
       </div>
     </div>
   </footer>
-<!-- Lightbox -->
 <div id="lightbox" class="lightbox">
-  <span class="lightbox-close">&times;</span>
+  <button class="lb-prev">‹</button>
   <img class="lightbox-img" src="" alt="">
+  <button class="lb-next">›</button>
+  <button class="lightbox-close">×</button>
 </div>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
 
@@ -1301,38 +1311,71 @@ Friends and family pricing works a little differently here — sometimes paid in
     const year = document.getElementById("year");
     if (year) year.textContent = new Date().getFullYear();
 
-    /* ==========================
-       ✅ GALLERY LIGHTBOX (FIXED)
-       ========================== */
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.querySelector(".lightbox-img");
-    const closeBtn = document.querySelector(".lightbox-close");
+/* ==========================
+   ✅ GALLERY LIGHTBOX (ARROWS + SLIDESHOW)
+========================== */
 
-    if (!lightbox || !lightboxImg || !closeBtn) return;
+const galleryItems = [...document.querySelectorAll(".gallery-item")]
+  .filter(item => item.style.backgroundImage);
 
-    document.querySelectorAll(".gallery-item").forEach(item => {
-      item.addEventListener("click", () => {
-        const bg = item.style.backgroundImage;
-        if (!bg) return; // skip placeholders
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.querySelector(".lightbox-img");
+const btnPrev = document.querySelector(".lb-prev");
+const btnNext = document.querySelector(".lb-next");
+const btnClose = document.querySelector(".lightbox-close");
 
-        const imgUrl = bg.slice(5, -2);
-        lightboxImg.src = imgUrl;
-        lightbox.style.display = "flex";
-        document.body.style.overflow = "hidden";
-      });
-    });
+let currentIndex = 0;
+let slideshowTimer = null;
 
-    closeBtn.addEventListener("click", () => {
-      lightbox.style.display = "none";
-      document.body.style.overflow = "";
-    });
+function showImage(index) {
+  currentIndex = (index + galleryItems.length) % galleryItems.length;
+  lightboxImg.src = galleryItems[currentIndex]
+    .style.backgroundImage.slice(5, -2);
+}
 
-    lightbox.addEventListener("click", e => {
-      if (e.target === lightbox) {
-        lightbox.style.display = "none";
-        document.body.style.overflow = "";
-      }
-    });
+function openLightbox(index) {
+  showImage(index);
+  lightbox.style.display = "flex";
+  document.body.style.overflow = "hidden";
+  startSlideshow();
+}
+
+function closeLightbox() {
+  lightbox.style.display = "none";
+  document.body.style.overflow = "";
+  stopSlideshow();
+}
+
+function startSlideshow() {
+  stopSlideshow();
+  slideshowTimer = setInterval(() => {
+    showImage(currentIndex + 1);
+  }, 4000); // 4 seconds
+}
+
+function stopSlideshow() {
+  if (slideshowTimer) clearInterval(slideshowTimer);
+}
+
+galleryItems.forEach((item, index) => {
+  item.addEventListener("click", () => openLightbox(index));
+});
+
+btnPrev.addEventListener("click", () => showImage(currentIndex - 1));
+btnNext.addEventListener("click", () => showImage(currentIndex + 1));
+btnClose.addEventListener("click", closeLightbox);
+
+lightbox.addEventListener("click", e => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener("keydown", e => {
+  if (lightbox.style.display !== "flex") return;
+  if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+  if (e.key === "ArrowRight") showImage(currentIndex + 1);
+  if (e.key === "Escape") closeLightbox();
+});
+
 
   });
 </script>

@@ -186,4 +186,52 @@ body {
 .gallery-item {
   cursor: zoom-in;
 }
+/* =========================
+   GALLERY LIGHTBOX (IMPROVED)
+========================= */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 12px;
+}
+
+.lb-prev,
+.lb-next,
+.lightbox-close {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.lb-prev,
+.lb-next {
+  font-size: 2rem;
+  padding: 0.2rem 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+
+.lightbox-close {
+  top: 20px;
+  right: 20px;
+  font-size: 1.6rem;
+  padding: 0.2rem 0.55rem;
+}
 
