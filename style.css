@@ -213,4 +213,35 @@ body {
     display: none; /* swipe feels more natural on mobile */
   }
 }
+.airbnb-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #ff385c;
+  color: #fff;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 8px 18px rgba(255,56,92,0.25);
+  transition: all 0.25s ease;
+}
+
+.airbnb-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(255,56,92,0.35);
+}
+
+.airbnb-logo {
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  color: #ff385c;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
 
