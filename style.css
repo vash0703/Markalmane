@@ -263,4 +263,25 @@ body {
 .reach-grid {
   align-items: start;
 }
+.reach-map-mini {
+  text-align: center;
+}
+
+.map-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(79,124,79,0.12);
+  color: #2f5a3a;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.map-pill:hover {
+  background: rgba(79,124,79,0.2);
+}
 
